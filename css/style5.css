@@ -1,0 +1,108 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 
+text가 있는 박스 뒤의 이미지는 문양이 너무 많으면 안된다. 
+
+폰트를 선택하는 능력, 배치 아이디어가 더 중요, 강중약, 구도
+(툴사용 기술보다)
+
+프론트엔드 7:3 백앤드 공부시간
+포토샵 수업시간에 공부한거 중심으로 먼저
+
+백앤드는 할 줄 아는 사람이 없다. 희소가치 있다.
+처음 시작 회사 2~3년 후 이직
+*/
+
+.ch-item { 
+	/* relative에서는 left, right, top, bottom 잘 쓰지 않는다. 
+	주변 상황에 따라서 바뀌는데 예측하기 힘들기 때문이다. */
+	position:relative; width:100%; height:100%; 
+	border-radius:50%;
+	box-shadow:0 2px 2px rgba(0,0,0,0.3);
+}
+
+.ch-img-1 { background:url(../imgs/13.jpg) no-repeat center center; }
+.ch-img-2 { background:url(../imgs/14.jpg) no-repeat center center; }
+.ch-img-3 { background:url(../imgs/15.jpg) no-repeat center center; }
+/* 이미지 하나니까 no-repeat */
+
+.ch-info {
+	position:absolute; left:20px; top:20px;
+	width:180px; height:180px; 
+	border-radius:50%;
+	/*background:#F8F8F8 url(../imgs/bg.jpg) repeat left top;*/
+	box-shadow:0 0 0 20px rgba(255,255,255,0.3)
+		,0 0 5px rgba(115,114,23,0.8) inset; 
+		/* innerglow : inset 안주면 outerglow */
+}
+/* 항상 두번 작성하지 않도록 공통 스타일 시트 먼저 작성하고 개별 스타일 시트 작성한다 */
+.ch-info > div { /* ch-info-front, ch-info-back 공통 스타일시트 적용 */
+	position:absolute;
+	width:180px; height:180px; 
+	border-radius:50%;
+}
+.ch-info-front { transition:all 0.6s ease-in-out; }
+.ch-info-back {
+	background:rgba(0,0,51,0.9); /* text 뒤의 배경을 약간 보이게 해서 고급스럽게 보임 */
+	opacity:0;
+	transform:scale(2);
+	transition:all 0.4s ease-in 0.2s;
+}
+.ch-info-back h3 {
+	height:90px; padding-top:35px;
+	font-size:22px; color:#FFF; font-weight:700;
+	text-align:center; text-transform:uppercase;
+	text-shadow:0 0 1px #FFF
+		,0 1px 1px rgba(0,0,0,0.4);
+	/* text-shadow:0 0 : innerglow or outerglow. 하지만 텍스트는 outerglow, dropshadow만 사용한다. */
+	border-bottom:1px dashed rgba(255,255,255,0.3); 
+	/* double : 두 줄 / K7 페이스리프트 뒤쪽 점선 - 요즘은 점선이 유행 */
+}
+.ch-info-back p {
+	width:110px; margin:0 auto; padding-top:20px; /* width 값 주었으므로 margin으로 중앙 정렬 */
+	font-size:12px; color:#E7615E; font-style:italic;
+	text-align:center;
+}
+.ch-info-back p a {
+	display:block; /*width height를 주기 위해 */
+	color:#F4F4F4; font-style:normal; font-weight:700;
+	text-transform:uppercase;
+}
+.ch-info-back p a:hover { color:#FF0; }
+
+
+
+
+
+/*///// 마우스 오버한 경우: 부모박스에 마우스 오버했을 때 자식 박스에 효과를 준다. 효과를 여러 박스들에게 줄 수 있다. /////*/
+.ch-item:hover .ch-info-front {
+	opacity:0;
+	transform:scale(0);
+}
+.ch-item:hover .ch-info-back {
+	opacity:1;
+	transform:scale(1);	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

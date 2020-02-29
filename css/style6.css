@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 
+.ch-info-wrap 박스 분리 여부에 따라 box-shadow 부분 다시 생각
+position 쓰면 z-index 안먹는다???
+이미지도 text-align:center; 주면 중앙 정렬 된다 
+
+기존 사이트의 스타일시트를 분석할 시간 없다.
+안되면 되는 방법으로 빨리 바꿔서 되게만 만들면 된다.
+*/
+
+.ch-item {
+	position:relative; width:100%; height:100%;
+	border-radius:50%;
+	box-shadow:0 2px 2px rgba(0,0,0,0.3);
+	/*
+	CSS3 추가된 것
+	box-shadow & 여러개 동시 적용 가능 - 적극 활용 할 것
+	*/
+}
+
+
+.ch-info {
+	position:absolute; left:20px; top:20px; 
+	width:180px; height:180px;
+	border-radius:50%; 
+	background:#F8F8F8 url(../imgs/bg.jpg);
+	box-shadow:0 0 0 20px rgba(255,255,255,0.3),
+		0 0 3px rgba(115,115,23,0.75);
+	
+	perspective:800px; 
+	transform-style:preserve-3d;
+	transition:all 0.4s ease-in;
+	/* 
+	드림위버에 등록되어 있으면 제정된 것임. 별도로 크로스 브라우징 할 필요 없다. 
+	제정이 된 것은 무조건 알아야 한다.
+	(드림위버CC에서 다를 수 있음.)
+	*/
+}
+
+
+.ch-info > div {
+	position:absolute; width:100%; height:100%;
+	border-radius:50%;
+	transition:all 0.6s ease-out;
+	/* 공통으로 transition 을 모두 넣어줌. */
+}
+.ch-info-front {
+	transform-origin:50% 100%;
+	box-shadow:2px 1px 3px rgba(0,0,0,0.3) inset;
+}
+.ch-info-back { 
+	opacity:0;
+	background:rgba(230,130,105, 0); 
+	/* opacity와 background를 하나로 통합한 코드 패턴 */
+}
+
+
+
+.ch-img-1 { background:url(../imgs/16.jpg) no-repeat center center; z-index:9; }
+.ch-img-2 { background:url(../imgs/17.jpg) no-repeat center center; z-index:8; }
+.ch-img-3 { background:url(../imgs/18.jpg) no-repeat center center; z-index:7;}
+/* z-index로 줄바꿈시 겹침 미리 방지 */
+
+
+
+.ch-info-back h3 {
+	height:90px; padding-top:35px;
+	font-size:22px; color:#FFF; font-weight:700;
+	text-align:center; text-transform:uppercase;
+	text-shadow:0 0 1px #FFF
+		,0 1px 1px rgba(0,0,0,0.4);
+	/* text-shadow:0 0 : innerglow or outerglow. 하지만 텍스트는 outerglow, dropshadow만 사용한다. */
+	border-bottom:1px dashed rgba(255,255,255,0.3); 
+	/* double : 두 줄 / K7 페이스리프트 뒤쪽 점선 - 요즘은 점선이 유행 */
+}
+.ch-info-back p {
+	width:140px; margin:0 auto; padding-top:20px; 
+	/* 
+	width 값 주었으므로 margin으로 중앙 정렬 
+	width 바꿔도 줄바꿈시
+	1.font-size
+	2.letter-spacing:-0.5px
+	*/
+	font-size:12px; color:#E7615E; font-style:italic;
+	text-align:center;
+}
+.ch-info-back p a {
+	display:block; /*width height를 주기 위해 */
+	color:#F4F4F4; font-style:normal; font-weight:700;
+	text-transform:uppercase;
+}
+.ch-info-back p a:hover { color:#FF0; }
+
+
+
+
+
+
+/*///// 부모박스에 마우스 오버했을 때 자식 박스에 효과적용 /////*/
+.ch-item:hover .ch-info { box-shadow:0 0 0 20px rgba(255,255,255,0) }
+.ch-item:hover .ch-info-front {
+	-webkit-transform:rotate3d(1,0,0,-180deg);
+	-moz-transform:rotate3d(1,0,0,-180deg);
+	-o-transform:rotate3d(1,0,0,-180deg);
+	-ms-transform:rotate3d(1,0,0,-180deg);
+	transform:rotate3d(1,0,0,-180deg);
+	box-shadow:0 0 5px rgba(255,255,255,0.3) inset,
+		0	0	3px rgba(0,0,0,0.4) inset;
+}
+.ch-item:hover .ch-info-back { opacity:1; background:rgba(230,130,105, 0.6); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+부모박스 - perspective:800px;
+자식박스 - transform-style:preserve-3d;
+변경박스 - transform:rotate3d(0, 1, 0, -180deg);
+               - :hover 적용 시 변경박스에서 적용 안되면 부모 바로 아래 자식박스에 적용해 본다.
+*/
+
+.ch-item { 
+	/* 정보에 관련되어 있는 박스 전체를 감싸는 박스(core box - 레이아웃 중 가장 중요한 박스) */
+	position:relative; 
+	/* 필수암기
+	1. 박스 기준점을 웹 브라우저의 왼쪽 상단에서 부모 박스의 왼쪽 상단으로 옮김 
+		: 왜? 모니터 해상도가 개별적이므로 웹 브라우저 해상도도 개별적이다. 그러므로 position 속성과 left 속성, top 속성을 적용하면 모니터에 따라 위치값이 다르게 나타난다. 이를 극복하기 위해 박스 기준점을 옮긴다. (예:16:10 ▶ 16:9 변경 - 서로 다르다. / 데스크탑은 일정 픽셀 안에서 가두는 방식 사용해야 하기 때문)
+		>사용할 필요가 없는 영역: 모바일 영역(태블릿, 스마트폰) - 웹 브라우저가 디바이스에 100% 꽉 차므로 사용할 필요는 없지만 데스크탑의 코드를 그냥 사용하는 것이다.
+	2. position:absolute 를 적용한 박스가 position:relative 를 적용한 박스 위에서 덮는다. position:absolute 를 적용한 박스는 구조에서 아래쪽에 작성한 박스가 위에서 덮는다. z-index로 박스의 위와 아래를 결정할 수 있다.(같은 레벨의 absolute 박스 사이에서).
+	
+	-추가: 마진 패딩으로 위치 안잡히는 경우 ▶ 포지션으로
+	*/
+	width:100%; height:100%; 
+	border-radius:50%; /* 사각형 박스를 원로 만듦 */
+	cursor:default; /* 마우스 포인터를 화살표 모양으로 만듦, pointer 값을 적용하면 마우스 포인터가 손가락 모양으로 바뀐다. */
+	box-shadow:0 2px 2px rgba(0,0,0,0.4); /* 박스에 그림자를 적용, 가로 그림자 크기, 세로 그림자 크기, 번짐 효과 크기, 그림자 색상:
+	rgba(0,0,0,0.4) 함수: 첫번째 매개변수:Red, 두번째 매개변수: Green, 세번째 매개변수: Blue, 네번째 매개변수: Alpha(투명도:1~0(불투명~투명)) */
+}
+
+.ch-info-wrap { 
+	position:absolute; left:20px; top:20px;
+	width:180px; height:180px;
+	border-radius:50%;
+	background:#F8F8F8 url(../imgs/bg.jpg) repeat left top;
+	box-shadow:0 0 0 20px rgba(255,255,255,0.3)
+		,0 0 3px rgba(115,114,23,0.8) inset;
+	
+	/* 크로스 브라우징 작업 : 벤더(웹 브라우저 개발 업체) 프리픽스(접두사) */
+	-webkit-perspective:800px; /* 크롬, 사파리 */
+	-moz-perspective:800px; /* 파이어 폭스 */
+	-o-perspective:800px; /* 오페라 */
+	-ms-perspective:800px; /* 인터넷 익스플로러 */
+	perspective:800px; /* 3D 효과를 적용할 때 반드시 적용해야 한다. 회전반경(700, 800, 900 중 하나)*/
+	
+	transition:all 0.4s ease-in;
+}
+
+.ch-info {
+	position:absolute;
+	width:180px; height:180px;
+	border-radius:50%;
+	
+	-webkit-transform-style:preserve-3d; 
+	-moz-transform-style:preserve-3d;
+	-o-transform-style:preserve-3d;
+	-ms-transform-style:preserve-3d;
+	transform-style:preserve-3d; /* z축으로 효과를 적용 */
+	
+	transition:all 0.4s ease-in;
+}
+.ch-info > div { /* > : 자식 선택자로 ch-info-front, ch-info-back 박스에 공통 스타일 시트 적용 */
+	position:absolute;
+	width:100%; height:100%;
+	border-radius:50%;
+	
+	backface-visibility:hidden; /* 박스의 뒷면을 보이지 안보이게 함. */
+	/* 박스가 회전할 때 잔상이 없어진다. */
+	/* 배경 이미지를 적용할 수 없다. - 그래서 배경 색상을 대신 넣어 주었다. */
+}
+.ch-info h3 {
+	/* 
+	레이아웃 속성
+	font-family, font-size, color, font-weight 순서
+	
+	line-height로 띄우면 줄바꿈 될 수 있으므로 padding-top으로
+	*/
+	height:90px; padding-top:35px;
+	font-size:22px; color:#F8F8F8; font-weight:700;
+	text-align:center;
+	text-transform:uppercase; 
+	text-shadow:0 0 1px #FFF
+		,0 1px 1px rgba(0,0,0,0.4);
+	border-bottom:1px dashed rgba(0,51,0,0.4);
+}
+.ch-info .ch-info-front h3 {
+	width:180px; height:180px; padding-top:15px; 
+	border-radius:50%;
+	background:rgba(0,0,0,0.3);
+}
+.ch-info p {
+	width:110px; margin:0 auto; padding-top:25px;
+	font-size:12px; color:#F8F8F8; font-style:italic;
+	text-align:center;
+	border-top:1px dashed #0E160F;
+}
+.ch-info p a {
+	/* 블록형 박스로 변경 (margin, padding, width, height 적용되게 하기 위해서) */
+	display:block; 
+	padding-top:4px;
+	color:#F8F8F8; font-style:normal; font-weight:700;
+	text-transform:uppercase;
+	text-shadow:1px 1px 1px #000;
+}
+.ch-info p a:hover { color:#FFF222; }
+
+
+.ch-info .ch-info-back {
+	width:180px; height:180px; border-radius:50%;
+	background:rgba(0,15,0,0.9);
+	
+	transform:rotate3d(1, 0, 0, 180deg); /* 뒤로 돌려져서 처음에는 안보인다. */
+	/* rotate3d(x축, y축, 축, 감는양) - 0:비활성화, 1:활성화 */
+}
+
+
+.ch-img-1 { background:url(../imgs/10.jpg) no-repeat center center; }
+.ch-img-2 { background:url(../imgs/11.jpg) no-repeat center center; }
+.ch-img-3 { background:url(../imgs/12.jpg) no-repeat center center; }
+
+
+/*///// ch-item 박스에 마우스 오버 했을 경우 /////*/
+.ch-item:hover .ch-info-wrap {
+	/* 알파값 변경하면, 변경 되면서 투명도 조정됨. */
+	box-shadow:0 0 0 0 rgba(255,255,255,0.9)
+		,0 0 5px rgba(115,114,23,0.8) inset;
+}
+.ch-item:hover .ch-info-front h3 { display:none; }
+.ch-item:hover .ch-info {
+	transform:rotate3d(1, 0, 0, -180deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+새로운 것을 만났을때 받아들이고 숙지하고 사용해보는 습관
+
+interaction = 시작상태 + 나중상태 ▶ 먼저 선정 
+:hover, :active
+
+motion graphic : 학문 
+- 모션에 대한 기획력이 있어야 한다.
+- 구현력 : 기본이 있어야 응용이 된다. (소스코드 있는데에서 창조/연구)
+
+***요점***
+부모 자식 z-index필요X
+기준점 : transform-origin
+:after - structure 수 줄여준다.
+z-index: 같은 레벨 여러개에서 우선순위 정한다. 값 크면 위로
+함수 : translate(x,y), translateX, translateY
+			transform:scale() translate() rotate()
+			transition: 4개
+			rotate() - +(시계방향), -(반시계방향)
+*/
+
+.ch-item {
+	/* 모습을 예측하고 작성하고 바로 확인을 한다. */
+	position:relative;
+	width:100%; height:100%; border-radius:50%;
+	cursor:default; /*화살표 모양*/
+	box-shadow:0 2px 2px rgba(0,0,0,0.4);
+}
+.ch-thumb {
+	position:absolute;
+	width:100%; height:100%; border-radius:50%;
+	box-shadow:0 0 0 15px rgba(255,255,255,0.5) inset
+		,0 2px 2px rgba(0,0,0,0.5);
+	-webkit-transform-origin:85% 20%;
+	-moz-transform-origin:85% 20%;
+	-o-transform-origin:85% 20%;
+	-ms-transform-origin:85% 20%;
+	transform-origin:85% 20%;
+	/*
+	박스의 기준점(왼쪽 상단)을 변경: 첫번째 값 (가로위치), 두번째 값(세로위치) 
+	~ 밑에 점박스 먼저 작성하고 그대로 적는다 
+	*/
+	transition:all 0.4s ease-in; /* 박스의 시작상태와 나중상태의 중간단계를 자동으로 만들어주는 스타일 속성 */
+}
+.ch-thumb:after {
+	/*
+	:after = ch-thumb 박스 옆에 생성한 박스(점)에 스타일 적용
+				(thumb 과 같은레벨의 다음박스)
+	content:''; = 컨텐츠 안넣겠다.
+	absolute 로 잡았으면 위치는 left, top으로 잡을 것(margin, padding X)
+	*/
+	content:'';
+	position:absolute; left:85%; top:20%;
+	width:8px; height:8px; border-radius:50%;
+	background:#333;
+}
+.ch-img-1 { background:url(../imgs/7.jpg) no-repeat center center; z-index:9; /* absolute 상태에서 우선순위 극복 */}
+.ch-img-2 { background:url(../imgs/8.jpg) no-repeat center center; z-index:8; /* absolute 상태에서 우선순위 극복 */}
+.ch-img-3 { background:url(../imgs/9.jpg) no-repeat center center; z-index:7; /* absolute 상태에서 우선순위 극복 */}
+.ch-info {
+	/* 
+	포토샵의 레이어처럼 아래쪽에 작성한 박스가 (같은 레벨의) 위의 박스를 덮는다. 
+	*/
+	position:absolute;
+	width:100%; height:100%; border-radius:50%;
+	background:#C9512E url(../imgs/noise.png) repeat center center;
+	box-shadow:0 0 0 5px rgba(0,0,0,0.5) inset;
+}
+.ch-info h3 { /* 이전에 했던 코드 카피해서 빨리 개발 */
+	height:120px; margin:0 20px; padding-top:65px; 
+	font-size:24px; color:#FFF; font-weight:700;
+	text-align:center; text-transform:uppercase;
+	text-shadow:0 0 1px rgba(255,255,255,1), 0 1px 2px rgba(0,0,0,0.4);
+	border-bottom:1px dashed rgba(255,255,255,0.6);
+}
+.ch-info p {
+	margin:0 35px; padding-top:15px; 
+	font-size:12px; color:#FFF; font-style:italic;
+	text-align:center; 
+}
+.ch-info p a {
+	display:block; margin-top:10px; padding-top:18px;
+	width:60px; height:60px; border-radius:50%; 
+	font-size:10px; color:#FFF; font-style:normal; font-weight:700;
+	text-transform:uppercase;
+	text-shadow:1px 1px 2px rgba(0,0,0,0.6);
+	background:rgba(255,255,255,0.3);
+	
+	opercity:0;
+	transform:translateX(85px) rotate(180deg); 
+	/* 
+	처음 상태로 먼저 해보고 되면 웹표준 제정이 된 것이다 - 크로스브라우징 안해도 된다. 
+	*/
+	transition:all 0.4s ease-out 0.3s;
+}
+.ch-info p a:hover {
+	color:rgba(255,242,34,0.8);
+}
+
+
+
+
+.ch-item:hover .ch-thumb { transform:rotate(-110deg); }
+.ch-item:hover .ch-info p a { 
+	transform:translateX(45px) rotate(0deg); 
+	opercity:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
